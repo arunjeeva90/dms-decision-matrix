@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IND-VIAS DualSight DMS v0.2 — Decision Matrix</title>
+    <style>
+        :root {
+            --bg: #0f1117;
+            --surface: #1a1d2e;
+            --surface-2: #232740;
+            --border: #2e3354;
+            --text: #e4e7f1;
+            --text-muted: #8b92b0;
+            --accent: #6c63ff;
+            --accent-glow: rgba(108, 99, 255, 0.3);
+            --normal: #22c55e;
+            --monitor: #3b82f6;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --critical: #dc2626;
+            --gradient-1: linear-gradient(135deg, #6c63ff 0%, #a855f7 100%);
+            --gradient-2: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+            --radius: 12px;
+            --radius-sm: 8px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+        /* Hero */
+        .hero {
+            position: relative;
+            padding: 80px 40px 60px;
+            text-align: center;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at center, rgba(108,99,255,0.08) 0%, transparent 60%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+        .hero h1 {
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-weight: 800;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            position: relative;
+        }
+        .hero .subtitle {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            color: var(--text-muted);
+            max-width: 900px;
+            margin: 0 auto 24px;
+            position: relative;
+        }
+        .hero .version-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--accent);
+            font-weight: 600;
+            position: relative;
+        }
+
+        /* Navigation */
+        .nav-bar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(15, 17, 23, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 20px;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        .nav-bar::-webkit-scrollbar { height: 0; }
+        .nav-inner {
+            display: flex;
+            gap: 8px;
+            max-width: 1200px;
+            margin: 0 auto;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .nav-btn {
+            padding: 8px 16px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        .nav-btn:hover, .nav-btn.active {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+            box-shadow: 0 4px 15px var(--accent-glow);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Section */
+        .section {
+            margin-bottom: 60px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+            cursor: pointer;
+            user-select: none;
+        }
+        .section-number {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient-1);
+            border-radius: 10px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        .section-title {
+            font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+            font-weight: 700;
+        }
+        .section-toggle {
+            margin-left: auto;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            transition: transform 0.3s;
+            flex-shrink: 0;
+        }
+        .section-toggle svg { transition: transform 0.3s; }
+        .section.collapsed .section-toggle svg { transform: rotate(-90deg); }
+        .section-content {
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s;
+        }
+        .section.collapsed .section-content {
+            max-height: 0 !important;
+            opacity: 0;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+        .card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3), 0 0 20px var(--accent-glow);
+            transform: translateY(-2px);
+        }
+
+        /* Risk Level Visual */
+        .risk-pipeline {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            margin: 30px 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .risk-node {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 20px;
+            border-radius: var(--radius);
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+        .risk-node:hover { transform: scale(1.08); }
+        .risk-node .dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            animation: glow 2s ease-in-out infinite;
+        }
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 5px currentColor; }
+            50% { box-shadow: 0 0 20px currentColor, 0 0 40px currentColor; }
+        }
+        .risk-node .label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-align: center;
+        }
+        .risk-arrow {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            margin: 0 4px;
+        }
+        .risk-normal .dot { background: var(--normal); color: var(--normal); }
+        .risk-monitor .dot { background: var(--monitor); color: var(--monitor); }
+        .risk-warning .dot { background: var(--warning); color: var(--warning); }
+        .risk-danger .dot { background: var(--danger); color: var(--danger); }
+        .risk-critical .dot { background: var(--critical); color: var(--critical); }
+
+        /* Tooltip */
+        .risk-node .tooltip {
+            position: absolute;
+            bottom: calc(100% + 12px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            padding: 12px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+            z-index: 10;
+            color: var(--text);
+        }
+        .risk-node:hover .tooltip { opacity: 1; }
+
+        /* Tables */
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            margin: 20px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+        thead {
+            background: var(--surface-2);
+            position: sticky;
+            top: 0;
+        }
+        th {
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 700;
+            color: var(--accent);
+            border-bottom: 2px solid var(--border);
+            white-space: nowrap;
+        }
+        td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-muted);
+        }
+        tr:hover td { background: rgba(108,99,255,0.05); color: var(--text); }
+        tr:last-child td { border-bottom: none; }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .badge-normal { background: rgba(34,197,94,0.15); color: var(--normal); }
+        .badge-monitor { background: rgba(59,130,246,0.15); color: var(--monitor); }
+        .badge-warning { background: rgba(245,158,11,0.15); color: var(--warning); }
+        .badge-danger { background: rgba(239,68,68,0.15); color: var(--danger); }
+        .badge-critical { background: rgba(220,38,38,0.2); color: var(--critical); }
+
+        /* Code blocks */
+        .code-block {
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 20px;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 0.82rem;
+            overflow-x: auto;
+            margin: 16px 0;
+            line-height: 1.8;
+        }
+        .code-block .keyword { color: var(--accent); }
+        .code-block .operator { color: var(--warning); }
+        .code-block .comment { color: var(--text-muted); font-style: italic; }
+        .code-block .value { color: var(--normal); }
+
+        /* Priority List */
+        .priority-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 20px 0;
+        }
+        .priority-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 20px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .priority-item:hover {
+            border-color: var(--accent);
+            transform: translateX(8px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        .priority-rank {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        .priority-rank.high { background: rgba(239,68,68,0.2); color: var(--danger); }
+        .priority-rank.medium { background: rgba(245,158,11,0.2); color: var(--warning); }
+        .priority-rank.low { background: rgba(34,197,94,0.2); color: var(--normal); }
+        .priority-text { flex: 1; }
+        .priority-text .rule { font-weight: 600; color: var(--text); }
+        .priority-text .reason { font-size: 0.8rem; color: var(--text-muted); margin-top: 2px; }
+
+        /* Architecture diagram */
+        .arch-diagram {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+        .arch-box {
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .arch-box:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 20px var(--accent-glow);
+            transform: translateY(-4px);
+        }
+        .arch-box .icon { font-size: 1.8rem; margin-bottom: 8px; }
+        .arch-box .name { font-weight: 700; font-size: 0.9rem; }
+        .arch-box .desc { font-size: 0.75rem; color: var(--text-muted); margin-top: 4px; }
+
+        /* Final formula */
+        .formula-box {
+            background: linear-gradient(135deg, rgba(108,99,255,0.1) 0%, rgba(59,130,246,0.1) 100%);
+            border: 1px solid var(--accent);
+            border-radius: var(--radius);
+            padding: 30px;
+            text-align: center;
+            margin: 30px 0;
+        }
+        .formula-box h3 {
+            color: var(--accent);
+            margin-bottom: 16px;
+            font-size: 1.1rem;
+        }
+        .formula-box code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            display: block;
+            text-align: left;
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 2;
+        }
+
+        /* Regulation table special */
+        .reg-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            background: rgba(108,99,255,0.15);
+            color: var(--accent);
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* Filter tabs */
+        .filter-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+        .filter-tab {
+            padding: 6px 14px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--text-muted);
+        }
+        .filter-tab:hover, .filter-tab.active {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+
+        /* Callout */
+        .callout {
+            border-left: 3px solid var(--accent);
+            padding: 16px 20px;
+            background: rgba(108,99,255,0.05);
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            margin: 16px 0;
+            font-size: 0.9rem;
+        }
+        .callout strong { color: var(--accent); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero { padding: 50px 20px 40px; }
+            .container { padding: 20px 12px; }
+            .card { padding: 16px; }
+            .risk-pipeline { gap: 4px; }
+            .risk-node { padding: 10px 12px; }
+            .nav-inner { justify-content: flex-start; }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-in { animation: fadeInUp 0.5s forwards; }
+    </style>
+</head>
+<body>
+
+<!-- Hero -->
+<div class="hero">
+    <h1>IND-VIAS DualSight DMS v0.2</h1>
+    <p class="subtitle">Driver Attention, Distraction, Drowsiness & Driver-Availability Decision Matrix<br>
+    Aligned to AIS-184 DDAW, AIS-197/Bharat NCAP Safety Assist, EU DDAW/ADDW, UNECE R171, ISO 26262, ISO 21448 and ISO/SAE 21434</p>
+    <span class="version-badge">Addendum v0.2</span>
+</div>
+
+<!-- Navigation -->
+<nav class="nav-bar">
+    <div class="nav-inner">
+        <a href="#section-1" class="nav-btn">Risk Levels</a>
+        <a href="#section-2" class="nav-btn">Classification</a>
+        <a href="#section-3" class="nav-btn">Scenarios</a>
+        <a href="#section-4" class="nav-btn">Thresholds</a>
+        <a href="#section-5" class="nav-btn">Cumulative Logic</a>
+        <a href="#section-6" class="nav-btn">Rule Hierarchy</a>
+        <a href="#section-7" class="nav-btn">Regulations</a>
+        <a href="#section-9" class="nav-btn">Architecture</a>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- Section 1: Risk Levels -->
+    <div class="section" id="section-1">
+        <div class="section-header" onclick="toggleSection(this)">
+            <div class="section-number">1</div>
+            <h2 class="section-title">New Risk Level: Monitor</h2>
+            <div class="section-toggle"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="section-content">
+            <div class="card">
+                <p style="color: var(--text-muted); margin-bottom: 20px;">A new intermediate state has been added between Normal and Warning to reduce false positives and acknowledge states that aren't yet unsafe but require observation.</p>
+                
+                <div class="risk-pipeline">
+                    <div class="risk-node risk-normal">
+                        <div class="dot"></div>
+                        <div class="label">Normal</div>
+                        <div class="tooltip">Fully acceptable driving behavior<br>e.g. Eyes open, road gaze</div>
+                    </div>
+                    <span class="risk-arrow">&#8594;</span>
+                    <div class="risk-node risk-monitor">
+                        <div class="dot"></div>
+                        <div class="label">Monitor</div>
+                        <div class="tooltip">Not yet unsafe, but watch closely<br>e.g. Short infotainment glance</div>
+                    </div>
+                    <span class="risk-arrow">&#8594;</span>
+                    <div class="risk-node risk-warning">
+                        <div class="dot"></div>
+                        <div class="label">Warning</div>
+                        <div class="tooltip">Sustained distraction/drowsiness risk<br>e.g. Looking down > threshold</div>
+                    </div>
+                    <span class="risk-arrow">&#8594;</span>
+                    <div class="risk-node risk-danger">
+                        <div class="dot"></div>
+                        <div class="label">Danger</div>
+                        <div class="tooltip">Immediate safety risk<br>e.g. Microsleep, texting + gaze down</div>
+                    </div>
+                    <span class="risk-arrow">&#8594;</span>
+                    <div class="risk-node risk-critical">
+                        <div class="dot"></div>
+                        <div class="label">Critical</div>
+                        <div class="tooltip">Driver unavailable or DMS unreliable<br>e.g. No face, camera blocked</div>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <strong>Key Insight:</strong> Not every "head down" or "head turned" state should immediately become Warning. Many cases should first transition to <strong>Monitor</strong> to reduce alert fatigue.
+                </div>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr><th>Level</th><th>Meaning</th><th>Example</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><span class="badge badge-normal">Normal</span></td><td>Fully acceptable driving behavior</td><td>Eyes open, road gaze</td></tr>
+                            <tr><td><span class="badge badge-monitor">Monitor</span></td><td>Not yet unsafe, but watch closely</td><td>Short infotainment glance, short head-down posture</td></tr>
+                            <tr><td><span class="badge badge-warning">Warning</span></td><td>Sustained distraction/drowsiness risk</td><td>Looking down > threshold, phone on ear</td></tr>
+                            <tr><td><span class="badge badge-danger">Danger</span></td><td>Immediate safety risk</td><td>Microsleep, eyes closed, texting + gaze down</td></tr>
+                            <tr><td><span class="badge badge-critical">Critical</span></td><td>Driver unavailable or DMS unreliable</td><td>No face, camera blocked, driver unresponsive</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 2: Classification Principle -->
+    <div class="section" id="section-2">
+        <div class="section-header" onclick="toggleSection(this)">
+            <div class="section-number">2</div>
+            <h2 class="section-title">Corrected Classification Principle</h2>
+            <div class="section-toggle"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="section-content">
+            <div class="card">
+                <p style="color: var(--text-muted); margin-bottom: 20px;">The classifier should NOT use head pose alone. It must fuse multiple signals for accurate classification. This is the biggest architecture correction.</p>
+                
+                <div class="arch-diagram">
+                    <div class="arch-box"><div class="icon">🧭</div><div class="name">Head Pose</div><div class="desc">Yaw, pitch, roll angles</div></div>
+                    <div class="arch-box"><div class="icon">👁️</div><div class="name">Eye State</div><div class="desc">Open/closed, PERCLOS</div></div>
+                    <div class="arch-box"><div class="icon">🎯</div><div class="name">Gaze Zone</div><div class="desc">Road, mirror, lap, side</div></div>
+                    <div class="arch-box"><div class="icon">📱</div><div class="name">Hand/Phone</div><div class="desc">Object detection, position</div></div>
+                    <div class="arch-box"><div class="icon">⏱️</div><div class="name">Duration</div><div class="desc">Temporal analysis</div></div>
+                    <div class="arch-box"><div class="icon">🚗</div><div class="name">Vehicle Context</div><div class="desc">Speed, ADAS state, road</div></div>
+                </div>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr><th>Case</th><th style="color:var(--danger)">Wrong Logic</th><th style="color:var(--normal)">Correct Logic</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Head down + eyes open</strong></td>
+                                <td>Always distracted</td>
+                                <td>Monitor if short / Warning if sustained / Danger if phone detected</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Head turned side</strong></td>
+                                <td>Always distracted</td>
+                                <td>Normal if mirror-check / Warning if prolonged co-passenger gaze</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Eyes closed</strong></td>
+                                <td>Always drowsy</td>
+                                <td>Normal if blink &lt; threshold / Danger if prolonged</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Head straight + eyes open</strong></td>
+                                <td>Always normal</td>
+                                <td>Could be distracted if phone on ear, fixed stare, or no saccade</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 3: Scenarios -->
+    <div class="section" id="section-3">
+        <div class="section-header" onclick="toggleSection(this)">
+            <div class="section-number">3</div>
+            <h2 class="section-title">Additional Scenarios Matrix</h2>
+            <div class="section-toggle"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="section-content">
+            <div class="card">
+                <div class="filter-tabs">
+                    <span class="filter-tab active" onclick="filterScenarios('all', this)">All</span>
+                    <span class="filter-tab" onclick="filterScenarios('distraction', this)">Distraction</span>
+                    <span class="filter-tab" onclick="filterScenarios('drowsiness', this)">Drowsiness</span>
+                    <span class="filter-tab" onclick="filterScenarios('adas', this)">ADAS Fusion</span>
+                    <span class="filter-tab" onclick="filterScenarios('incapacitation', this)">Incapacitation</span>
+                </div>
+                <div class="table-wrapper">
+                    <table id="scenarios-table">
+                        <thead>
+                            <tr><th>Scenario</th><th>Alert Level</th><th>Primary Type</th><th>Trigger</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr data-type="distraction"><td>Short infotainment glance</td><td><span class="badge badge-monitor">Monitor</span></td><td>Distraction</td><td>Single glance below allowed threshold</td></tr>
+                            <tr data-type="distraction"><td>Repeated infotainment glances</td><td><span class="badge badge-warning">Warning</span></td><td>Distraction</td><td>Multiple off-road glances within time window</td></tr>
+                            <tr data-type="distraction"><td>Phone on ear</td><td><span class="badge badge-warning">Warning</span></td><td>Distraction</td><td>Phone near ear sustained</td></tr>
+                            <tr data-type="distraction"><td>Phone in hand, gaze still road</td><td><span class="badge badge-warning">Warning</span></td><td>Distraction</td><td>Phone object detected even if gaze forward</td></tr>
+                            <tr data-type="distraction"><td>Phone in hand + gaze down</td><td><span class="badge badge-danger">Danger</span></td><td>Distraction</td><td>Phone + downward gaze</td></tr>
+                            <tr data-type="distraction"><td>Texting posture</td><td><span class="badge badge-danger">Danger</span></td><td>Distraction</td><td>Hand near lap + gaze down + repeated pattern</td></tr>
+                            <tr data-type="drowsiness"><td>Fixed stare, no saccade</td><td><span class="badge badge-warning">Warning</span></td><td>Drowsiness</td><td>Road gaze but abnormal eye dynamics</td></tr>
+                            <tr data-type="drowsiness"><td>Slow eyelid closure</td><td><span class="badge badge-warning">Warning</span></td><td>Drowsiness</td><td>Slow closure trend before full closure</td></tr>
+                            <tr data-type="drowsiness"><td>Head nodding</td><td><span class="badge badge-danger">Danger</span></td><td>Drowsiness</td><td>Repeated chin-drop recovery</td></tr>
+                            <tr data-type="drowsiness"><td>Yawning + slow blink</td><td><span class="badge badge-warning">Warning</span></td><td>Drowsiness</td><td>Fatigue indicators in rolling window</td></tr>
+                            <tr data-type="distraction"><td>Co-passenger conversation (short)</td><td><span class="badge badge-monitor">Monitor</span></td><td>Distraction</td><td>Short side glance</td></tr>
+                            <tr data-type="distraction"><td>Co-passenger conversation (long)</td><td><span class="badge badge-warning">Warning</span></td><td>Distraction</td><td>Sustained side gaze</td></tr>
+                            <tr data-type="distraction"><td>Looking backward</td><td><span class="badge badge-warning">Warning</span> / <span class="badge badge-danger">Danger</span></td><td>Distraction</td><td>Rear-seat gaze beyond threshold</td></tr>
+                            <tr data-type="incapacitation"><td>Driver ignores warning</td><td><span class="badge badge-critical">Critical</span></td><td>Inattention / Incapacitation</td><td>No gaze recovery after alert</td></tr>
+                            <tr data-type="adas"><td>ADAS forward TTC + distracted</td><td><span class="badge badge-danger">Danger</span></td><td>ADAS Fusion</td><td>Forward risk high + DMS not attentive</td></tr>
+                            <tr data-type="adas"><td>ADAS lane departure + distracted</td><td><span class="badge badge-danger">Danger</span></td><td>ADAS Fusion</td><td>LDW risk + gaze off-road</td></tr>
+                            <tr data-type="incapacitation"><td>Medical event / abnormal stillness</td><td><span class="badge badge-critical">Critical</span></td><td>Medical</td><td>No response + abnormal posture</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 4: Duration Thresholds -->
+    <div class="section" id="section-4">
+        <div class="section-header" onclick="toggleSection(this)">
+            <div class="section-number">4</div>
+            <h2 class="section-title">Duration Thresholds — Engineering Defaults</h2>
+            <div class="section-toggle"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="section-content">
+            <div class="callout">
+                <strong>Important:</strong> These are prototype defaults only. Final values must be tuned with real Indian cabin data. Exact regulatory timing thresholds vary by regulation, speed range, ODD, and test procedure.
+            </div>
+            <div class="card">
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr><th>Signal</th><th><span class="badge badge-monitor">Monitor</span></th><th><span class="badge badge-warning">Warning</span></th><th><span class="badge badge-danger">Danger</span></th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Single off-road glance</strong></td><td>1.5–2.0 s</td><td>&gt; 2.0 s</td><td>&gt; 3.0–4.0 s</td></tr>
+                            <tr><td><strong>Downward gaze / phone-lap zone</strong></td><td>1.0–1.5 s</td><td>&gt; 2.0 s</td><td>&gt; 3.0 s</td></tr>
+                            <tr><td><strong>Co-passenger side gaze</strong></td><td>&lt; 2.0 s</td><td>&gt; 2.0–3.0 s</td><td>&gt; 4.0 s</td></tr>
+                            <tr><td><strong>Looking backward</strong></td><td>&lt; 1.5 s</td><td>&gt; 2.0 s</td><td>&gt; 3.0 s</td></tr>
+                            <tr><td><strong>Eye closure / blink</strong></td><td>&lt; 300–400 ms</td><td>&gt; 800 ms</td><td>&gt; 1500 ms</td></tr>
+                            <tr><td><strong>Repeated micro-nods</strong></td><td>Observe</td><td>Repeated in 10–30 s</td><td>Persistent / no recovery</td></tr>
+                            <tr><td><strong>PERCLOS short window</strong></td><td>&lt; 0.15</td><td>&gt; 0.25</td><td>&gt; 0.40</td></tr>
+                            <tr><td><strong>No face / no eyes</strong></td><td>&lt; 0.5 s transient</td><td>&gt; 1.0 s</td><td>Sustained unavailable</td></tr>
+                            <tr><td><strong>No response after warning</strong></td><td>—</td><td>&gt; 2–3 s</td><td>Repeated no response</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 5: Cumulative Logic -->
+    <div class="section" id="section-5">
+        <div class="section-header" onclick="toggleSection(this)">
+            <div class="section-number">5</div>
+            <h2 class="section-title">Cumulative-State Logic</h2>
+            <div class="section-toggle"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="section-content">
+            <div class="card">
+                <h3 style="margin-bottom:16px; color: var(--accent);">A. Single-Event Logic</h3>
+                <div class="code-block">
+<span class="keyword">One</span> long off-road gaze         <span class="operator">→</span> <span class="value">Warning</span>
+<span class="keyword">One</span> long eye closure           <span class="operator">→</span> <span class="value">Danger</span>
+<span class="keyword">One</span> phone-in-hand + gaze-down  <span class="operator">→</span> <span class="value">Danger</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 style="margin-bottom:16px; color: var(--accent);">B. Cumulative Logic</h3>
+                <div class="code-block">
+<span class="keyword">Many</span> short off-road glances within <span class="value">30 s</span>     <span class="operator">→</span> <span class="value">Warning</span>
+<span class="keyword">Repeated</span> slow eyelid closures within <span class="value">60 s</span> <span class="operator">→</span> <span class="value">Drowsiness Warning</span>
+<span class="keyword">Repeated</span> head nods within <span class="value">30 s</span>            <span class="operator">→</span> <span class="value">Drowsiness Danger</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 style="margin-bottom:16px; color: var(--accent);">C. Recovery Logic</h3>
+                <p style="color:var(--text-muted); margin-bottom:16px;">Do not remove the warning immediately when one frame becomes normal. This prevents flickering.</p>
+                <div class="code-block">
+<span class="keyword">Warning ON</span>  <span class="operator">=</span> condition true for threshold duration
+<span class="keyword">Warning OFF</span> <span class="operator">=</span> road gaze stable for <span class="value">1.0–2.0 s</span>
+<span class="keyword">Danger OFF</span>  <span class="operator">=</span> driver recovers + gaze stable + eyes open + no phone cue
+                </div>
+                <div class="callout" style="margin-top: 16px;">
+                    <strong>Anti-flicker:</strong> Prevents unstable transitions like<br>
+                    <code style="color:var(--danger)">NORMAL → DEGRADED → WARNING → NORMAL → WARNING</code>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 6: Rule Hierarchy -->
+    <div class="section" id="section-6">
+        <div class="section-header" onclick="toggleSection(this)">
+            <div class="section-number">6</div>
+            <h2 class="section-title">Final Architecture Rule Hierarchy</h2>
+            <div class="section-toggle"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="section-content">
+            <p style="color:var(--text-muted); margin-bottom:20px;">Priority order in code — higher number = lower priority (checked last).</p>
+            <div class="priority-list">
+                <div class="priority-item">
+                    <div class="priority-rank high">1</div>
+                    <div class="priority-text">
+                        <div class="rule">Camera blocked / face lost / eye confidence too low</div>
+                        <div class="reason">Cannot trust DMS output</div>
+                    </div>
+                </div>
+                <div class="priority-item">
+                    <div class="priority-rank high">2</div>
+                    <div class="priority-text">
+                        <div class="rule">Driver unavailable / no response to alert</div>
+                        <div class="reason">Highest intervention risk</div>
+                    </div>
+                </div>
+                <div class="priority-item">
+                    <div class="priority-rank high">3</div>
+                    <div class="priority-text">
+                        <div class="rule">Microsleep / prolonged eye closure</div>
+                        <div class="reason">Immediate danger</div>
+                    </div>
+                </div>
+                <div class="priority-item">
+                    <div class="priority-rank high">4</div>
+                    <div class="priority-text">
+                        <div class="rule">Phone/texting with gaze down</div>
+                        <div class="reason">High-risk visual-manual distraction</div>
+                    </div>
+                </div>
+                <div class="priority-item">
+                    <div class="priority-rank medium">5</div>
+                    <div class="priority-text">
+                        <div class="rule">ADAS forward risk + driver not looking</div>
+                        <div class="reason">Driver-aware ADAS escalation</div>
+                    </div>
+                </div>
+                <div class="priority-item">
+                    <div class="priority-rank medium">6</div>
+                    <div class="priority-text">
+                        <div class="rule">Sustained off-road gaze</div>
+                        <div class="reason">Distraction warning</div>
+                    </div>
+                </div>
+                <div class="priority-item">
+                    <div class="priority-rank medium">7</div>
+                    <div class="priority-text">
+                        <div class="rule">Cumulative repeated glances</div>
+                        <div class="reason">Hidden distraction pattern</div>
+                    </div>
+                </div>
+                <div class="priority-item">
+                    <div class="priority-rank medium">8</div>
+                    <div class="priority-text">
+                        <div class="rule">Slow eyelid / PERCLOS / head nod</div>
+                        <div class="reason">Drowsiness build-up</div>
+                    </div>
+                </div>
+                <div class="priority-item">
+                    <div class="priority-rank low">9</div>
+                    <div class="priority-text">
+                        <div class="rule">Valid mirror/cluster/short glance</div>
+                        <div class="reason">Suppress false alerts</div>
+                    </div>
+                </div>
+                <div class="priority-item">
+                    <div class="priority-rank low">10</div>
+                    <div class="priority-text">
+                        <div class="rule">Normal attentive</div>
+                        <div class="reason">Default only after all exclusions</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 7: Regulations -->
+    <div class="section" id="section-7">
+        <div class="section-header" onclick="toggleSection(this)">
+            <div class="section-number">7</div>
+            <h2 class="section-title">Regulation & Compliance Mapping</h2>
+            <div class="section-toggle"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="section-content">
+            <div class="callout">
+                <strong>Correction:</strong> AIS-140 is NOT the right primary regulatory anchor for this DMS classification table. AIS-140 is for vehicle location tracking / emergency systems for public transport. The proper India-side anchor is <strong>AIS-184 / DDAW direction</strong>.
+            </div>
+            <div class="card">
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr><th>Region / Standard</th><th>Role in DMS</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><span class="reg-badge">India</span> <strong>AIS-184 / DDAW</strong></td><td>Main India-facing anchor for driver drowsiness and attention warning. Use for homologation-style DMS logic.</td></tr>
+                            <tr><td><span class="reg-badge">India</span> <strong>AIS-197 / Bharat NCAP</strong></td><td>Safety-rating alignment, not necessarily direct DMS homologation.</td></tr>
+                            <tr><td><span class="reg-badge">EU</span> <strong>EU 2019/2144 GSR</strong></td><td>High-level EU safety framework including driver drowsiness/attention and distraction warning systems.</td></tr>
+                            <tr><td><span class="reg-badge">EU</span> <strong>EU 2021/1341</strong></td><td>DDAW-specific reference for drowsiness/attention warning.</td></tr>
+                            <tr><td><span class="reg-badge">EU</span> <strong>EU 2023/2590</strong></td><td>ADDW-specific reference for advanced driver distraction warning.</td></tr>
+                            <tr><td><span class="reg-badge">UNECE</span> <strong>UNECE R171 DCAS</strong></td><td>Important when DMS is fused with L2/L2+ driver assistance and driver engagement monitoring.</td></tr>
+                            <tr><td><span class="reg-badge">ISO</span> <strong>ISO 26262</strong></td><td>Safety concept, ASIL decomposition, degraded mode, diagnostic coverage.</td></tr>
+                            <tr><td><span class="reg-badge">ISO</span> <strong>ISO 21448 / SOTIF</strong></td><td>False positive/negative handling, misuse, unknown unsafe cases.</td></tr>
+                            <tr><td><span class="reg-badge">ISO</span> <strong>ISO/SAE 21434</strong></td><td>Cybersecurity for camera pipeline, model update, logs, CAN/HMI messages.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 9: Architecture -->
+    <div class="section" id="section-9">
+        <div class="section-header" onclick="toggleSection(this)">
+            <div class="section-number">9</div>
+            <h2 class="section-title">Final Output Architecture</h2>
+            <div class="section-toggle"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="section-content">
+            <div class="card">
+                <p style="color:var(--text-muted); margin-bottom: 24px;">The matrix outputs four independent classification heads that are fused into a single driver risk score.</p>
+                <div class="arch-diagram">
+                    <div class="arch-box" style="border-color: var(--warning);">
+                        <div class="icon">😴</div>
+                        <div class="name">Drowsiness State</div>
+                        <div class="desc">PERCLOS, blink, head nod</div>
+                    </div>
+                    <div class="arch-box" style="border-color: var(--danger);">
+                        <div class="icon">📵</div>
+                        <div class="name">Distraction State</div>
+                        <div class="desc">Gaze, phone, visual-manual</div>
+                    </div>
+                    <div class="arch-box" style="border-color: var(--critical);">
+                        <div class="icon">🚨</div>
+                        <div class="name">Availability State</div>
+                        <div class="desc">Responsiveness, posture</div>
+                    </div>
+                    <div class="arch-box" style="border-color: var(--monitor);">
+                        <div class="icon">📷</div>
+                        <div class="name">DMS Confidence</div>
+                        <div class="desc">Camera, face detection, quality</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="formula-box">
+                <h3>Final Decision Fusion</h3>
+                <code>
+                    <span style="color:var(--accent)">Final Driver Risk</span> = <span style="color:var(--warning)">max</span>(<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Drowsiness Risk,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Distraction Risk,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Driver Unavailability Risk,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;ADAS-Fusion Risk,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;DMS-Degraded Risk<br>
+                    )
+                </code>
+                <p style="margin-top: 16px; color: var(--text-muted); font-size: 0.85rem;">This makes the system OEM-ready and much more stable than a simple table-based classifier.</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Footer -->
+<footer style="text-align:center; padding: 40px 20px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.8rem;">
+    <p>IND-VIAS DualSight DMS Decision Matrix v0.2 Addendum</p>
+    <p style="margin-top: 4px; opacity: 0.6;">Interactive documentation for engineering review</p>
+</footer>
+
+<script>
+// Section toggle
+function toggleSection(header) {
+    const section = header.closest('.section');
+    section.classList.toggle('collapsed');
+}
+
+// Scroll-based reveal
+const sections = document.querySelectorAll('.section');
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+sections.forEach(s => observer.observe(s));
+
+// Active nav highlight
+const navBtns = document.querySelectorAll('.nav-btn');
+const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const id = entry.target.id;
+            navBtns.forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('href') === '#' + id);
+            });
+        }
+    });
+}, { threshold: 0.3 });
+sections.forEach(s => sectionObserver.observe(s));
+
+// Smooth scroll
+navBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector(btn.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    });
+});
+
+// Scenario filter
+function filterScenarios(type, el) {
+    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+    
+    const rows = document.querySelectorAll('#scenarios-table tbody tr');
+    rows.forEach(row => {
+        if (type === 'all') {
+            row.style.display = '';
+        } else {
+            row.style.display = row.dataset.type === type ? '' : 'none';
+        }
+    });
+}
+
+// Set initial max-height for content sections
+document.querySelectorAll('.section-content').forEach(content => {
+    content.style.maxHeight = content.scrollHeight + 1000 + 'px';
+});
+</script>
+
+</body>
+</html>
