@@ -1,0 +1,30 @@
+Scenario ID,Section,Scenario,Head State,Eye State,Gaze / Context,Driver State,Classification,Alert Level,Primary Type,Trigger Condition,Recommended HMI,Compliance Mapping
+DMS-001,A Head straight,Attentive baseline,Straight on-road axis,Open,Road gaze,Normal,Normal,Normal,None,Baseline road gaze with valid face and eyes,No alert,AIS-184 / DDAW baseline
+DMS-002,A Head straight,Normal blink,Straight on-road axis,Brief closed,Road gaze,Normal blink,Normal,Normal,None,Eye closure below blink threshold,No alert; no nuisance warning,SOTIF false positive prevention
+DMS-003,A Head straight,Slow eyelid closure,Straight on-road axis,Closing slowly,Drooping,Drowsy early,Warning,Warning,Drowsiness,Slow closure trend or PERCLOS rising,Soft visual + audio prompt,AIS-184 / EU DDAW
+DMS-004,A Head straight,Microsleep,Straight on-road axis,Closed,Closed,Drowsy severe,Danger,Danger,Drowsiness,Prolonged eye closure > threshold,Urgent audio + haptic,AIS-184 / EU DDAW
+DMS-005,A Head straight,Phone on ear,Straight on-road axis,Open,Phone near ear,Distracted cognitive/manual,Warning,Warning,Distraction,Phone object near ear sustained,Stage-1 warning,EU ADDW / OEM extension
+DMS-006,A Head straight,Phone in hand with road gaze,Straight on-road axis,Open,Phone in hand; gaze road,Distracted manual,Warning,Warning,Distraction,Phone detected even if gaze remains forward,Visual + audio warning,EU ADDW / SOTIF misuse
+DMS-007,A Head straight,Phone in hand + gaze down,Straight or slight down,Open,Phone down / lap,Distracted visual/manual,Danger,Danger,Distraction,Phone object + downward gaze,Escalating warning,EU ADDW / OEM extension
+DMS-008,A Head straight,Fixed stare,Straight on-road axis,Open,No saccade / fixed stare,Drowsy or inattentive,Warning,Warning,Drowsiness,Reduced eye dynamics despite forward gaze,Monitor then warning,AIS-184 / DDAW
+DMS-009,B Head down,Short cluster glance,Head down,Open,Instrument cluster,Transitional,Monitor,Info,None,Short sanctioned downward glance,No audio; optional monitor,SOTIF false positive prevention
+DMS-010,B Head down,Sustained head-down visual task,Head down,Open,Downward / side,Distracted visual,Warning,Warning,Distraction,Head-down gaze beyond threshold,Stage-1 warning,EU ADDW
+DMS-011,B Head down,Texting posture,Head down,Open,Phone/lap zone,Distracted visual/manual,Danger,Danger,Distraction,Head down + phone/lap cue + duration,Urgent warning,EU ADDW / SOTIF misuse
+DMS-012,B Head down,Head-down drowsiness,Head down,Closing/closed,Drooping with head,Drowsy head nod,Danger,Danger,Drowsiness,Chin-drop + eye closure / microsleep signature,Urgent warning,AIS-184 / DDAW
+DMS-013,C Head tilted,Short posture variation,Head tilted,Open,Road gaze compensated,Monitor,Monitor,Monitor,Distraction,Short lateral tilt with gaze compensation,Monitor only,SOTIF false positive prevention
+DMS-014,C Head tilted,Prolonged side posture,Head tilted,Open,Passenger / side,Distracted postural,Warning,Warning,Distraction,Prolonged tilt with off-road gaze,Stage-1 warning,EU ADDW
+DMS-015,C Head tilted,Tilt + slow closure,Head tilted,Closing slowly,Drooping with tilt,Drowsy early,Warning,Warning,Drowsiness,Slow eyelid closure with tilt,Warning,AIS-184 / DDAW
+DMS-016,C Head tilted,Tilt + closed eyes,Head tilted,Closed,Closed,Drowsy definite,Danger,Danger,Drowsiness,Lateral head drop + closed eyes,Urgent warning,AIS-184 / DDAW
+DMS-017,D Head turning,Mirror check,Head turning left/right,Open,Mirror zone,Normal sanctioned,Normal,Normal,None,Short mirror check within threshold,No alert,SOTIF false positive prevention
+DMS-018,D Head turning,Prolonged side gaze,Head turning left/right,Open,Side window / off-road,Distracted visual,Warning,Warning,Distraction,Sustained off-road side gaze,Stage-1 warning,EU ADDW
+DMS-019,D Head turning,Co-passenger conversation,Head turning left/right,Open,Passenger side,Distracted social/cognitive,Warning,Warning,Distraction,Prolonged passenger gaze / conversation,Warning if sustained,EU ADDW / OEM extension
+DMS-020,D Head turning,Backward look,Head turned rearward,Open,Rear seat / back,Distracted rearward,Warning,Danger,Distraction,Rearward gaze beyond threshold,Warning or danger based on duration,EU ADDW / SOTIF misuse
+DMS-021,D Head turning,Side turn + closed eyes,Head turning left/right,Closed,Closed,Drowsy definite,Danger,Danger,Drowsiness,Head turned with eyes closed,Urgent warning,AIS-184 / DDAW
+DMS-022,E Temporal,Cumulative short glances,Any,Open,Repeated off-road,Distracted cumulative,Warning,Warning,Distraction,Many short glances within rolling window,Escalating warning,EU ADDW
+DMS-023,E Temporal,Repeated micro-nods,Any,Slow closure / recovery,Drooping and recovering,Drowsy progressive,Warning to Danger,Danger,Drowsiness,Repeated head-nod cycle,Escalate to urgent,AIS-184 / DDAW
+DMS-024,E Temporal,Yawning + slow blink,Any,Slow blink,Facial fatigue cue,Drowsy cumulative,Warning,Warning,Drowsiness,Yawn + slow blink + blink-rate change,Warning,AIS-184 / DDAW
+DMS-025,E Temporal,Driver ignores warning,Any,Any,No recovery after alert,Driver unavailable,Critical,Critical,Availability,No gaze recovery or response after alert,Escalate / handoff,UNECE R171 / DCAS
+DMS-026,F Fusion,Forward TTC risk + distracted driver,Any distracted,Any,ADAS forward risk present,Critical driver-aware risk,Danger,Critical,ADAS Fusion,High forward risk + driver not attentive,Early FCW / stronger HMI,ISO 26262 / SOTIF
+DMS-027,F Fusion,Lane departure + driver off-road gaze,Any distracted,Open,Off-road + LDW risk,Critical lane-risk fusion,Danger,Danger,ADAS Fusion,Lane risk + eyes off-road,LDW escalation,ISO 26262 / SOTIF
+DMS-028,F Fusion,Camera blocked / DMS unavailable,Any,Unknown,No reliable face/eyes,DMS degraded,Critical,Degraded,DMS Confidence,Camera blocked or signal confidence too low,DMS unavailable tell-tale,ISO 26262 / ISO 21448
+DMS-029,F Fusion,Medical event suspicion,Abnormal / still,Any,No response / abnormal posture,Incapacitation suspicion,Critical,Critical,Availability,No response + abnormal posture / motion,Urgent handoff / MRC request,SOTIF / OEM safety concept

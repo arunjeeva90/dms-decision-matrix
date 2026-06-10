@@ -1,2 +1,13 @@
-# dms-decision-matrix
-IND-VIAS DualSight DMS v0.2 — Driver Attention, Distraction, Drowsiness &amp; Availability Decision Matrix aligned to AIS-184, Bharat NCAP, EU DDAW/ADDW, UNECE R171, ISO 26262 &amp; ISO 21448.
+# IND-VIAS DualSight DMS v0.2 — Final Corrected Interactive Decision Matrix
+
+This package retains the original dark IND-VIAS web style and adds the final corrected interactive matrix, full table view, CSV download, threshold guidance, compliance mapping cards, ADAS readiness contract and architecture-review flow.
+
+Open `index.html` locally or deploy it through GitHub Pages.
+
+
+## Interactive Webpage
+
+Open the IND-VIAS DualSight DMS v0.2 interactive driver-state decision matrix here:
+
+[Launch DMS Decision Matrix Webpage](https://arunjeeva90.github.io/dms-decision-matrix/)
+
