@@ -1,0 +1,30 @@
+Scenario_ID,Derives_Requirements,Verified_By,Normalized_Outcome
+DMS-001,"SYS-DMS-1100;SYS-DMS-1200;SYS-DMS-1300;SYS-DMS-1505",TST-DMS-2001,Attentive baseline/no warning
+DMS-002,"SYS-DMS-1202;SYS-DMS-1203;SYS-DMS-1510",TST-DMS-2002,Normal blink/no nuisance warning
+DMS-003,"SYS-DMS-1204;SYS-DMS-1205;SYS-DMS-1215",TST-DMS-2003,Early drowsiness warning
+DMS-004,"SYS-DMS-1203;SYS-DMS-1207;SYS-DMS-1503",TST-DMS-2004,Microsleep/severe drowsiness
+DMS-005,"SYS-DMS-1309;SYS-DMS-1310;SYS-DMS-1321",TST-DMS-2005,OEM phone-ear extension
+DMS-006,"SYS-DMS-1311;SYS-DMS-1312;SYS-DMS-1317",TST-DMS-2006,Manual distraction separated from visual distraction
+DMS-007,"SYS-DMS-1313;SYS-DMS-1504;SYS-DMS-1511",TST-DMS-2007,Combined visual/manual distraction
+DMS-008,"SYS-DMS-1214;SYS-DMS-1215",TST-DMS-2008,Fixed stare supporting cue only
+DMS-009,"SYS-DMS-1302;SYS-DMS-1510",TST-DMS-2009,Sanctioned cluster glance
+DMS-010,"SYS-DMS-1306;SYS-DMS-1319",TST-DMS-2010,Sustained downward visual distraction
+DMS-011,"SYS-DMS-1313;SYS-DMS-1314;SYS-DMS-1511",TST-DMS-2011,Texting combined distraction
+DMS-012,"SYS-DMS-1208;SYS-DMS-1209",TST-DMS-2012,Head-down drowsiness requires eye/nod evidence
+DMS-013,"SYS-DMS-1315;SYS-DMS-1510",TST-DMS-2013,Short posture variation/no warning
+DMS-014,"SYS-DMS-1307;SYS-DMS-1316",TST-DMS-2014,Side posture requires off-road evidence
+DMS-015,"SYS-DMS-1204;SYS-DMS-1215",TST-DMS-2015,Tilt plus slow closure
+DMS-016,"SYS-DMS-1210;SYS-DMS-1217",TST-DMS-2016,Lateral drop plus valid closed eyes
+DMS-017,"SYS-DMS-1303;SYS-DMS-1510",TST-DMS-2017,Sanctioned mirror glance
+DMS-018,"SYS-DMS-1307;SYS-DMS-1319",TST-DMS-2018,Prolonged side visual distraction
+DMS-019,"SYS-DMS-1307;SYS-DMS-1320;SYS-DMS-1321",TST-DMS-2019,Passenger visual/cognitive separation
+DMS-020,"SYS-DMS-1304;SYS-DMS-1308",TST-DMS-2020,Context-aware rearward gaze
+DMS-021,"SYS-DMS-1211;SYS-DMS-1217",TST-DMS-2021,Side turn plus confirmed eye closure
+DMS-022,"SYS-DMS-1318;SYS-DMS-1319;SYS-DMS-1500",TST-DMS-2022,Cumulative short glances
+DMS-023,"SYS-DMS-1208;SYS-DMS-1215;SYS-DMS-1511",TST-DMS-2023,Repeated micro-nod escalation
+DMS-024,"SYS-DMS-1212;SYS-DMS-1213",TST-DMS-2024,Yawn as supporting cue
+DMS-025,"SYS-DMS-1404;SYS-DMS-1406;SYS-DMS-1407;SYS-DMS-1615",TST-DMS-2025,Driver availability/no-response
+DMS-026,"SYS-DMS-1602;SYS-DMS-1603;SYS-DMS-1604;SYS-DMS-1607",TST-DMS-2026,Driver-aware FCW escalation
+DMS-027,"SYS-DMS-1602;SYS-DMS-1603;SYS-DMS-1605;SYS-DMS-1607",TST-DMS-2027,Driver-aware LDW escalation
+DMS-028,"SYS-DMS-1700;SYS-DMS-1704;SYS-DMS-1706;SYS-DMS-1712;SYS-DMS-1609",TST-DMS-2028,DMS unavailable separate from behavior
+DMS-029,"SYS-DMS-1409;SYS-DMS-1410;SYS-DMS-1411;SYS-DMS-1615",TST-DMS-2029,Unresponsiveness/possible incapacitation no diagnosis

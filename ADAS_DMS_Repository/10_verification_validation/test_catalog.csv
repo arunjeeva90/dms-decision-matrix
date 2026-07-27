@@ -1,0 +1,17 @@
+Test_ID,Requirement_ID,Scenario,Method,Pass_Criteria,Status
+TST-DMS-0001,SYS-DMS-0002,Independent output contract,Interface test,All states validity freshness reason codes and integrity fields encoded correctly,Draft
+TST-DMS-0002,SYS-DMS-0004,Short mirror glance,Scenario test,No distraction warning within calibrated sanctioned duration,Draft
+TST-DMS-0003,SYS-DMS-0006,Camera blocked,Fault injection,Unavailable state and reason asserted within allocated FTTI,Draft
+TST-DMS-0004,SYS-DMS-0008,Nominal latency,Measurement,99th percentile within project limit,Draft
+TST-DMS-0005,FSR-DMS-0002,Stale perception packet,Fault injection,Safety monitor rejects packet and downstream fallback is entered,Draft
+TST-DMS-0100,SYS-DMS-0100,Market profile selection,Configuration test,Correct profile selected from market category model status date and feature set,Draft
+TST-DMS-0101,SYS-DMS-0101,India AIS-184 drowsiness warning,Homologation scenario test,Warning and operating behaviour meet controlled AIS-184 clause criteria,Draft
+TST-DMS-0102,SYS-DMS-0102,India AIS-184 activation and failure state,State-transition and fault-injection test,Activation reactivation deactivation and failure indication meet controlled AIS criteria,Draft
+TST-DMS-0103,SYS-DMS-0104,EU DDAW reference sleepiness threshold,Regulatory validation,Warning is issued at or before the controlled EU regulatory threshold with required evidence quality,Draft
+TST-DMS-0104,SYS-DMS-0105,EU DDAW day and night operation,Vehicle test,Performance meets controlled acceptance criteria across required lighting and road conditions,Draft
+TST-DMS-0105,SYS-DMS-0106,EU DDAW privacy closed-loop operation,Inspection and privacy audit,Core operation needs no biometric identity and unnecessary data are not retained,Draft
+TST-DMS-0106,SYS-DMS-0107,EU ADDW long visual distraction,Regulatory scenario test,Defined gaze zones and timing thresholds produce the required warning,Draft
+TST-DMS-0107,SYS-DMS-0108,EU ADDW driver and seating diversity,Dataset audit and vehicle test,Required characteristics and seating-position range are covered with traceable results,Draft
+TST-DMS-0108,SYS-DMS-0109,EU ADDW warning and failure behaviour,State-transition and fault-injection test,Controlled activation reactivation warning and failure criteria are satisfied,Draft
+TST-DMS-0109,SYS-DMS-0110,UN R171 DCAS driver engagement interface,Vehicle integration test,Availability engagement warning transition freshness and integrity behaviour meet selected R171 series,Draft
+TST-DMS-0110,SYS-DMS-0112,Attempt to weaken mandatory behaviour,Negative configuration test,Build or runtime rejects any overlay that weakens mandatory behaviour,Draft

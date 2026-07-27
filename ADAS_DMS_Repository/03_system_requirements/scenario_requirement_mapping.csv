@@ -1,0 +1,30 @@
+Scenario_ID,Scenario,Normalized_output,Primary_requirement_IDs,Verification_ID,Regulatory_classification,Engineering_status
+DMS-001,Attentive baseline,No behavioral risk,"SYS-DMS-1100;SYS-DMS-1200;SYS-DMS-1300;SYS-DMS-1505",TST-DMS-2001,DDAW baseline,Accepted
+DMS-002,Normal blink,Normal blink suppressed,"SYS-DMS-1202;SYS-DMS-1203;SYS-DMS-1510",TST-DMS-2002,SOTIF false-positive prevention,Accepted
+DMS-003,Slow eyelid closure,Drowsy warning,"SYS-DMS-1204;SYS-DMS-1205;SYS-DMS-1215",TST-DMS-2003,AIS-184/EU DDAW,Accepted
+DMS-004,Microsleep,Severe drowsy/microsleep,"SYS-DMS-1203;SYS-DMS-1207;SYS-DMS-1503",TST-DMS-2004,AIS-184/EU DDAW,Accepted
+DMS-005,Phone on ear,Manual/cognitive suspected,"SYS-DMS-1309;SYS-DMS-1310;SYS-DMS-1321",TST-DMS-2005,OEM extension,Reclassified
+DMS-006,Phone in hand with road gaze,Manual distraction,"SYS-DMS-1311;SYS-DMS-1312;SYS-DMS-1317",TST-DMS-2006,OEM extension/SOTIF,Corrected
+DMS-007,Phone in hand and gaze down,Combined distraction,"SYS-DMS-1313;SYS-DMS-1504;SYS-DMS-1511",TST-DMS-2007,EU ADDW plus OEM extension,Accepted
+DMS-008,Fixed stare,Supporting drowsiness cue,"SYS-DMS-1214;SYS-DMS-1215",TST-DMS-2008,SOTIF,Guarded
+DMS-009,Short cluster glance,Sanctioned task,"SYS-DMS-1302;SYS-DMS-1510",TST-DMS-2009,SOTIF false-positive prevention,Accepted
+DMS-010,Sustained head-down visual task,Visual distraction,"SYS-DMS-1306;SYS-DMS-1319",TST-DMS-2010,EU ADDW,Accepted
+DMS-011,Texting posture,Combined distraction,"SYS-DMS-1313;SYS-DMS-1314;SYS-DMS-1511",TST-DMS-2011,EU ADDW plus OEM extension,Accepted
+DMS-012,Head-down drowsiness,Drowsy head nod,"SYS-DMS-1208;SYS-DMS-1209",TST-DMS-2012,AIS-184/EU DDAW,Corrected
+DMS-013,Short posture variation,Normal/monitor,"SYS-DMS-1315;SYS-DMS-1510",TST-DMS-2013,SOTIF false-positive prevention,Accepted
+DMS-014,Prolonged side posture,Visual distraction if gaze off-road,"SYS-DMS-1307;SYS-DMS-1316",TST-DMS-2014,EU ADDW/SOTIF,Corrected
+DMS-015,Tilt and slow closure,Drowsy warning,"SYS-DMS-1204;SYS-DMS-1215",TST-DMS-2015,AIS-184/EU DDAW,Accepted
+DMS-016,Tilt and closed eyes,Severe drowsy,"SYS-DMS-1210;SYS-DMS-1217",TST-DMS-2016,AIS-184/EU DDAW,Accepted
+DMS-017,Mirror check,Sanctioned task,"SYS-DMS-1303;SYS-DMS-1510",TST-DMS-2017,SOTIF false-positive prevention,Accepted
+DMS-018,Prolonged side gaze,Visual distraction,"SYS-DMS-1307;SYS-DMS-1319",TST-DMS-2018,EU ADDW,Accepted
+DMS-019,Co-passenger conversation,Visual distraction/cognitive suspected,"SYS-DMS-1307;SYS-DMS-1320;SYS-DMS-1321",TST-DMS-2019,EU ADDW plus OEM extension,Corrected
+DMS-020,Backward look,Context-dependent rearward attention,"SYS-DMS-1304;SYS-DMS-1308",TST-DMS-2020,EU ADDW/SOTIF,Contextualized
+DMS-021,Side turn and closed eyes,Severe drowsy,"SYS-DMS-1211;SYS-DMS-1217",TST-DMS-2021,AIS-184/EU DDAW,Accepted
+DMS-022,Cumulative short glances,Cumulative visual distraction,"SYS-DMS-1318;SYS-DMS-1319;SYS-DMS-1500",TST-DMS-2022,EU ADDW,Accepted
+DMS-023,Repeated micro-nods,Progressive drowsiness,"SYS-DMS-1208;SYS-DMS-1215;SYS-DMS-1511",TST-DMS-2023,AIS-184/EU DDAW,Accepted
+DMS-024,Yawning and slow blink,Cumulative fatigue,"SYS-DMS-1212;SYS-DMS-1213",TST-DMS-2024,AIS-184/EU DDAW/SOTIF,Guarded
+DMS-025,Driver ignores warning,Driver unavailable,"SYS-DMS-1404;SYS-DMS-1406;SYS-DMS-1407;SYS-DMS-1615",TST-DMS-2025,UN R171/OEM safety concept,Accepted
+DMS-026,Forward TTC risk and distracted driver,Driver-aware FCW escalation,"SYS-DMS-1602;SYS-DMS-1603;SYS-DMS-1604;SYS-DMS-1607",TST-DMS-2026,ISO 26262/SOTIF/OEM,Accepted
+DMS-027,Lane departure and off-road gaze,Driver-aware LDW escalation,"SYS-DMS-1602;SYS-DMS-1603;SYS-DMS-1605;SYS-DMS-1607",TST-DMS-2027,ISO 26262/SOTIF/OEM,Accepted
+DMS-028,Camera blocked,DMS unavailable/driver state unknown,"SYS-DMS-1700;SYS-DMS-1704;SYS-DMS-1706;SYS-DMS-1712;SYS-DMS-1609",TST-DMS-2028,AIS/EU failure behavior/ISO 26262/SOTIF,Axis-separated
+DMS-029,Possible medical event,Driver unresponsive/possible incapacitation,"SYS-DMS-1409;SYS-DMS-1410;SYS-DMS-1411;SYS-DMS-1615",TST-DMS-2029,OEM safety concept/SOTIF,Terminology corrected

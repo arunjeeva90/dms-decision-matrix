@@ -1,0 +1,30 @@
+Test_ID,Scenario_ID,Primary_Requirement_IDs,Test_Scenario,Method,Minimum_Pass_Criteria,Status
+TST-DMS-2001,DMS-001,"SYS-DMS-1100;SYS-DMS-1200;SYS-DMS-1300;SYS-DMS-1505",Attentive baseline,Recorded-video and cabin-rig test,Valid driver and road gaze produce normal drowsiness/distraction and no HMI warning,Draft
+TST-DMS-2002,DMS-002,"SYS-DMS-1202;SYS-DMS-1203;SYS-DMS-1510",Normal blink suppression,Parametric eye-closure timing test,Closures below calibrated blink limit do not produce drowsiness warning,Draft
+TST-DMS-2003,DMS-003,"SYS-DMS-1204;SYS-DMS-1205;SYS-DMS-1215",Slow eyelid closure,Sequence test,Configured slow-closure/PERCLOS evidence produces early drowsiness warning within timing budget,Draft
+TST-DMS-2004,DMS-004,"SYS-DMS-1203;SYS-DMS-1207;SYS-DMS-1503",Microsleep,Sequence and boundary test,Prolonged closure with valid eyes reaches microsleep state while sub-threshold blink cases do not,Draft
+TST-DMS-2005,DMS-005,"SYS-DMS-1309;SYS-DMS-1310;SYS-DMS-1321",Phone on ear,Detection and configuration test,Phone-ear candidate is detected with persistence and classified only under enabled OEM extension,Draft
+TST-DMS-2006,DMS-006,"SYS-DMS-1311;SYS-DMS-1312;SYS-DMS-1317",Phone in hand with road gaze,Positive and negative scenario test,Manual distraction may assert but regulatory visual-distraction warning does not assert without gaze criterion,Draft
+TST-DMS-2007,DMS-007,"SYS-DMS-1313;SYS-DMS-1504;SYS-DMS-1511",Phone with downward gaze,Combined-cue sequence test,Valid phone plus downward gaze produces combined distraction and configured escalation,Draft
+TST-DMS-2008,DMS-008,"SYS-DMS-1214;SYS-DMS-1215",Fixed stare,Long-duration negative/positive test,Fixed stare alone does not warn; approved additional fatigue evidence enables configured warning,Draft
+TST-DMS-2009,DMS-009,"SYS-DMS-1302;SYS-DMS-1510",Short cluster glance,Gaze-zone timing test,Valid cluster glance within sanctioned duration produces no audible warning,Draft
+TST-DMS-2010,DMS-010,"SYS-DMS-1306;SYS-DMS-1319",Sustained head-down visual task,ADDW-style gaze-duration test,Downward off-road gaze beyond configured threshold produces visual-distraction warning,Draft
+TST-DMS-2011,DMS-011,"SYS-DMS-1313;SYS-DMS-1314;SYS-DMS-1511",Texting posture,Multi-cue scenario test,Head-down plus lap/phone and duration evidence produces combined-distraction escalation,Draft
+TST-DMS-2012,DMS-012,"SYS-DMS-1208;SYS-DMS-1209",Head-down drowsiness,Positive and negative sequence test,Head-down alone does not trigger drowsiness; valid eye/nod evidence does,Draft
+TST-DMS-2013,DMS-013,"SYS-DMS-1315;SYS-DMS-1510",Short posture variation,Posture boundary test,Short tilt with compensated road gaze remains normal or monitor and produces no warning,Draft
+TST-DMS-2014,DMS-014,"SYS-DMS-1307;SYS-DMS-1316",Prolonged side posture,Positive and negative scenario test,Posture alone does not warn; sustained off-road attention with posture does,Draft
+TST-DMS-2015,DMS-015,"SYS-DMS-1204;SYS-DMS-1215",Tilt with slow closure,Sequence test,Slow closure with valid tilted head produces early drowsiness state after confirmation,Draft
+TST-DMS-2016,DMS-016,"SYS-DMS-1210;SYS-DMS-1217",Tilt with closed eyes,Boundary and observability test,Valid prolonged closure with lateral drop reaches severe drowsy; invalid eyes output unknown,Draft
+TST-DMS-2017,DMS-017,"SYS-DMS-1303;SYS-DMS-1510",Mirror check,Mirror-zone timing and vehicle-context test,Valid short mirror check produces no distraction warning,Draft
+TST-DMS-2018,DMS-018,"SYS-DMS-1307;SYS-DMS-1319",Prolonged side gaze,ADDW-style gaze-duration test,Sustained side off-road gaze produces configured visual-distraction warning,Draft
+TST-DMS-2019,DMS-019,"SYS-DMS-1307;SYS-DMS-1320;SYS-DMS-1321",Passenger conversation,Visual/cognitive separation test,Sustained passenger gaze produces visual distraction; cognitive-suspected requires enabled multi-cue logic,Draft
+TST-DMS-2020,DMS-020,"SYS-DMS-1304;SYS-DMS-1308",Backward look,Vehicle-context HIL test,Rearward gaze is suppressed during valid reverse/parking context and warned when non-sanctioned,Draft
+TST-DMS-2021,DMS-021,"SYS-DMS-1211;SYS-DMS-1217",Side turn with closed eyes,Blink-exclusion and observability test,Transient blink is suppressed; confirmed closure with valid eyes produces severe drowsy,Draft
+TST-DMS-2022,DMS-022,"SYS-DMS-1318;SYS-DMS-1319;SYS-DMS-1500",Cumulative short glances,Rolling-window sequence test,Repeated sub-threshold glances exceed cumulative criterion and produce warning; sparse glances do not,Draft
+TST-DMS-2023,DMS-023,"SYS-DMS-1208;SYS-DMS-1215;SYS-DMS-1511",Repeated micro-nods,Temporal sequence test,Configured repeated nod cycles escalate drowsiness according to persistence rules,Draft
+TST-DMS-2024,DMS-024,"SYS-DMS-1212;SYS-DMS-1213",Yawning with slow blink,Positive and negative cumulative test,Yawn alone does not create critical state; approved cumulative cues produce configured warning,Draft
+TST-DMS-2025,DMS-025,"SYS-DMS-1404;SYS-DMS-1406;SYS-DMS-1407;SYS-DMS-1615",Driver ignores warning,HIL response-window test,No valid observed response after warning reaches unavailable; unobservable response produces unconfirmed,Draft
+TST-DMS-2026,DMS-026,"SYS-DMS-1602;SYS-DMS-1603;SYS-DMS-1604;SYS-DMS-1607",TTC risk with distracted driver,HIL ADAS-fusion test,Fresh valid collision risk plus distracted/unavailable driver produces separate driver-aware escalation request,Draft
+TST-DMS-2027,DMS-027,"SYS-DMS-1602;SYS-DMS-1603;SYS-DMS-1605;SYS-DMS-1607",Lane departure with off-road gaze,HIL ADAS-fusion test,Fresh valid lane risk plus off-road gaze produces separate driver-aware escalation request,Draft
+TST-DMS-2028,DMS-028,"SYS-DMS-1700;SYS-DMS-1704;SYS-DMS-1706;SYS-DMS-1712;SYS-DMS-1609",Camera blocked,Occlusion fault injection,Blocked camera produces DMS unavailable and driver-state unknown within FTTI without behavioral critical classification,Draft
+TST-DMS-2029,DMS-029,"SYS-DMS-1409;SYS-DMS-1410;SYS-DMS-1411;SYS-DMS-1615",Driver unresponsive or possible incapacitation,Multi-cue HIL scenario test,Output uses non-diagnostic terminology and requires configured multi-cue confirmation,Draft
