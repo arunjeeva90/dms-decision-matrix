@@ -1,0 +1,9 @@
+Source_ID,Link_Type,Target_ID,Comment
+STK-DMS-0004,derives,SYS-DMS-0002,Independent output contract
+STK-DMS-0005,derives,SYS-DMS-0006,Degraded detection
+SYS-DMS-0002,allocated_to,SWR-DMS-0301,Decision fusion
+SYS-DMS-0006,allocated_to,SWR-DMS-0501,Diagnostics
+SYS-DMS-0002,verified_by,TST-DMS-0001,Interface verification
+SYS-DMS-0004,verified_by,TST-DMS-0002,Sanctioned glance
+SYS-DMS-0006,verified_by,TST-DMS-0003,Blocked camera
+FSR-DMS-0002,verified_by,TST-DMS-0005,Stale packet rejection

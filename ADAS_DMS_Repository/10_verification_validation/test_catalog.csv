@@ -1,0 +1,6 @@
+Test_ID,Requirement_ID,Scenario,Method,Pass_Criteria,Status
+TST-DMS-0001,SYS-DMS-0002,Independent output contract,Interface test,All states and validity encoded correctly,Draft
+TST-DMS-0002,SYS-DMS-0004,Short mirror glance,Scenario test,No distraction warning within calibrated sanctioned duration,Draft
+TST-DMS-0003,SYS-DMS-0006,Camera blocked,Fault injection,Unavailable state and reason within allocated FTTI,Draft
+TST-DMS-0004,SYS-DMS-0008,Nominal latency,Measurement,99th percentile within project limit,Draft
+TST-DMS-0005,FSR-DMS-0002,Stale perception packet,Fault injection,Safety monitor rejects packet,Draft

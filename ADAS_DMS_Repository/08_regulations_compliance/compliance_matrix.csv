@@ -1,0 +1,7 @@
+Reference,Clause_or_topic,Applicability,Derived_requirement,Evidence_owner,Status
+India DDAW/DMS AIS,TBD,TBD,SYS-DMS-0002,System Engineering,Open
+Bharat NCAP AIS-197,TBD,TBD,STK-DMS-0008,Homologation,Open
+EU DDAW/ADDW,TBD,TBD,SYS-DMS-0003,Homologation,Open
+ISO 26262,Concept/System,Applicable,FSR-DMS-0001,Functional Safety,Open
+ISO 21448,Triggering conditions,Applicable,SYS-DMS-0004,SOTIF,Open
+ISO/SAE 21434,Update/data security,Applicable,SEC-DMS-0001,Cybersecurity,Open
