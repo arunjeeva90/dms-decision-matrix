@@ -14,7 +14,7 @@ This repository structures DMS product definition, stakeholder requirements, sys
 6. [Subsystem requirements](05_subsystems/README.md)
 7. [Functional safety and SOTIF](06_safety_sotif/README.md)
 8. [Cybersecurity and privacy](07_cybersecurity_privacy/README.md)
-9. [Regulations and compliance](08_regulations_compliance/README.md)
+9. [Regulations, mandates and compliance](08_regulations_compliance/README.md)
 10. [Interfaces](09_interfaces/README.md)
 11. [Verification and validation](10_verification_validation/README.md)
 12. [Data and AI lifecycle](11_data_ai_lifecycle/README.md)
@@ -29,6 +29,7 @@ This repository structures DMS product definition, stakeholder requirements, sys
 ```text
 Business / Product Objectives
   └── Stakeholder Requirements (STK-DMS-xxxx)
+       └── Regulatory Sources (REG-IND/EU/UNECE-xxxx)
        └── System Requirements (SYS-DMS-xxxx)
             ├── Hardware Requirements (HWR-DMS-xxxx)
             ├── Software Requirements (SWR-DMS-xxxx)
@@ -37,5 +38,17 @@ Business / Product Objectives
             └── Verification Cases (TST-DMS-xxxx)
 ```
 
+## Regulatory structure
+
+The compliance module distinguishes:
+
+- legally mandatory requirements;
+- future notified mandates;
+- type-approval regulations triggered by fitted functions;
+- voluntary NCAP/rating targets;
+- engineering standards and customer-contractual requirements.
+
+The current baseline includes India CMVR/AIS-184 applicability for M2/M3/N2/N3 programmes, Bharat NCAP/AIS-197 tracking, EU DDAW and ADDW, UNECE R171 DCAS integration, cybersecurity/software-update references, and India DPDP privacy obligations.
+
 ## Baseline status
-**v0.1 — Concept and system-definition baseline.** Regulatory thresholds remain subject to formal legal/homologation review and market-specific calibration.
+**v0.2 — Mandate-driven concept and system-definition baseline.** Exact clause thresholds, exemptions, controlled editions and technical-service interpretations remain subject to formal homologation/legal review before a compliance claim or production release.
