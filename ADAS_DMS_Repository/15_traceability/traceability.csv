@@ -7,3 +7,26 @@ SYS-DMS-0002,verified_by,TST-DMS-0001,Interface verification
 SYS-DMS-0004,verified_by,TST-DMS-0002,Sanctioned glance
 SYS-DMS-0006,verified_by,TST-DMS-0003,Blocked camera
 FSR-DMS-0002,verified_by,TST-DMS-0005,Stale packet rejection
+REG-IND-001,derives,SYS-DMS-0100,India regulatory profile selection
+REG-IND-001,derives,SYS-DMS-0101,India DDAW assessment and warning
+REG-IND-002,derives,SYS-DMS-0102,India activation reactivation and failure behaviour
+REG-IND-002,derives,SYS-DMS-0103,India manufacturer validation evidence
+REG-EU-001,derives,SYS-DMS-0104,EU DDAW threshold warning
+REG-EU-001,derives,SYS-DMS-0105,EU DDAW day and night operation
+REG-EU-001,derives,SYS-DMS-0106,EU DDAW privacy and closed-loop processing
+REG-EU-002,derives,SYS-DMS-0107,EU ADDW long visual distraction
+REG-EU-002,derives,SYS-DMS-0108,EU ADDW driver and seating diversity
+REG-EU-002,derives,SYS-DMS-0109,EU ADDW warning and failure behaviour
+REG-UNECE-001,derives,SYS-DMS-0110,UN R171 driver engagement interface
+STD-002,derives,SYS-DMS-0111,SOTIF triggering-condition catalogue
+SYS-DMS-0100,verified_by,TST-DMS-0100,Market profile selection
+SYS-DMS-0101,verified_by,TST-DMS-0101,India DDAW homologation scenario
+SYS-DMS-0102,verified_by,TST-DMS-0102,India activation and failure state
+SYS-DMS-0104,verified_by,TST-DMS-0103,EU DDAW threshold validation
+SYS-DMS-0105,verified_by,TST-DMS-0104,EU DDAW day and night
+SYS-DMS-0106,verified_by,TST-DMS-0105,EU DDAW privacy audit
+SYS-DMS-0107,verified_by,TST-DMS-0106,EU ADDW distraction timing
+SYS-DMS-0108,verified_by,TST-DMS-0107,EU ADDW diversity
+SYS-DMS-0109,verified_by,TST-DMS-0108,EU ADDW failure behaviour
+SYS-DMS-0110,verified_by,TST-DMS-0109,UN R171 DCAS integration
+SYS-DMS-0112,verified_by,TST-DMS-0110,Mandatory behaviour cannot be weakened
