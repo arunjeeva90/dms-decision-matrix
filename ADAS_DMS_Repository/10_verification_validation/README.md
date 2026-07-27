@@ -12,6 +12,24 @@
 - Cybersecurity and OTA tests
 - Homologation-specific evidence packs
 
+## Test catalogues
+
+- [`test_catalog.csv`](test_catalog.csv): platform, safety and regulatory-profile tests.
+- [`scenario_test_catalog.csv`](scenario_test_catalog.csv): explicit verification of live scenarios `DMS-001` through `DMS-029`.
+
+Every scenario verification shall include, where applicable:
+
+1. positive detection/classification;
+2. negative and confusing-neighbour cases;
+3. threshold boundary and timing tolerance;
+4. valid and invalid confidence/observability;
+5. sanctioned-task context;
+6. persistence, escalation and recovery;
+7. HMI request, reason code and interface validity;
+8. degraded sensing and fallback;
+9. subgroup/diversity coverage;
+10. market-profile and calibration configuration.
+
 ## Regulatory validation streams
 
 | Stream | Primary source | Required evidence pattern |
@@ -26,21 +44,23 @@
 ## Scenario families
 | Family | Examples |
 |---|---|
-| Normal sanctioned tasks | Mirror, cluster, junction, parking/reverse |
-| Drowsiness | Long blink, microsleep, nodding, PERCLOS trend, regulatory reference sleepiness level |
-| Distraction | Phone ear/hand/lap, infotainment, passenger, rearward gaze, defined regulatory gaze zones |
-| Availability | No response, slumped posture, face loss, driver engagement during DCAS |
-| Camera health | Blocked, glare, low light, NIR fault, misalignment, timing loss |
+| Normal sanctioned tasks | Attentive baseline, blink, mirror, cluster, junction, parking/reverse, compensated posture |
+| Drowsiness | Slow closure, long closure, microsleep, head nod, PERCLOS, lateral head drop, yawn plus slow blink |
+| Distraction | Long down/side gaze, phone ear/hand/lap, texting posture, passenger gaze, rearward gaze, cumulative short glances |
+| Availability | No response after warning, abnormal posture, possible incapacitation, face loss |
+| ADAS fusion | TTC/FCW risk plus inattention, lane-departure risk plus off-road gaze, DCAS handoff |
+| Camera health | Blocked, partial blockage, glare, low light, NIR fault, misalignment, timing loss |
 | Diversity | Spectacles, sunglasses, masks, facial hair, head coverings, skin tones, anthropometry and seating positions |
-| Vehicle context | Speed, steering, indicator, reverse, ADAS TTC risk, DCAS mode and transition state |
+| Vehicle context | Speed, steering, indicator, reverse, ADAS risk, DCAS mode and transition state |
 | Privacy/data | raw-frame disabled default, retention expiry, access/deletion, consent-gated optional logging |
 | Configuration | correct market profile, prohibition of weakened mandatory behaviour, version/traceability checks |
 
 ## Evidence quality rules
 
-Each regulatory test result shall identify:
+Each test result shall identify:
 
-- source regulation/AIS edition, clause and amendment;
+- requirement IDs and scenario IDs;
+- source regulation/AIS edition, clause and amendment where applicable;
 - vehicle type, configuration, calibration, software and model versions;
 - camera/lens/NIR and mounting configuration;
 - driver participant/subgroup and seating position;
@@ -50,6 +70,4 @@ Each regulatory test result shall identify:
 - raw evidence location, reviewer and approval status;
 - deviations, anomalies and retest rationale.
 
-A dataset-level accuracy value alone is not homologation evidence.
-
-See `test_catalog.csv` and `../08_regulations_compliance/05_regulatory_evidence_checklist.md`.
+A dataset-level accuracy value alone is not homologation or system-validation evidence.
