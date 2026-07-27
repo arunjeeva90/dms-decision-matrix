@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.3.0
+- Reviewed all live decision-matrix scenarios `DMS-001` through `DMS-029`
+- Added 220 atomic system requirements in DOORS-style modular ID ranges
+- Added operating-mode, sensing-quality, drowsiness, distraction, driver-availability, temporal/HMI, ADAS-fusion, degraded-operation, calibration and non-functional modules
+- Separated behavioral severity from DMS sensing availability
+- Corrected fixed-stare, yawning, head-pose-only, phone-manual and possible-incapacitation logic
+- Added normalized driver-state architecture diagram
+- Added scenario-to-requirement mapping, 29 scenario verification cases and bidirectional traceability
+- Upgraded repository baseline to scenario-decomposed v0.3
+
 ## v0.2.0
 - Restructured compliance module around legal mandates, type approval, voluntary rating and contractual standards
 - Added India CMVR/AIS-184 heavy-vehicle applicability and effective-date gates
