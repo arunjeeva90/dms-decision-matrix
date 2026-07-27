@@ -5,6 +5,14 @@ OEM/Tier-1 style, version-controlled requirements baseline for a scalable Driver
 ## Purpose
 This repository structures DMS product definition, stakeholder requirements, system requirements, architecture, hardware/software requirements, safety, SOTIF, cybersecurity, interfaces, regulations, verification, data/AI lifecycle, and bidirectional traceability in a DOORS-like hierarchy.
 
+## Current baseline scope
+
+- **220 atomic system requirements** across platform, sensing, drowsiness, distraction, availability, temporal/HMI, ADAS fusion, degraded operation, calibration and non-functional domains.
+- Explicit senior-engineering review of all live decision-matrix scenarios `DMS-001` through `DMS-029`.
+- Scenario-to-requirement-to-verification traceability with dedicated CSV catalogues.
+- Independent drowsiness, distraction, driver-availability and DMS-sensing-availability outputs.
+- Mandate-driven India, EU and UNECE regulatory profiles.
+
 ## Navigation
 1. [Governance and authoring rules](00_governance/README.md)
 2. [Platform definition](01_platform_definition/README.md)
@@ -29,7 +37,7 @@ This repository structures DMS product definition, stakeholder requirements, sys
 ```text
 Business / Product Objectives
   └── Stakeholder Requirements (STK-DMS-xxxx)
-       └── Regulatory Sources (REG-IND/EU/UNECE-xxxx)
+       ├── Regulatory Sources (REG-IND/EU/UNECE-xxxx)
        └── System Requirements (SYS-DMS-xxxx)
             ├── Hardware Requirements (HWR-DMS-xxxx)
             ├── Software Requirements (SWR-DMS-xxxx)
@@ -37,6 +45,15 @@ Business / Product Objectives
             ├── Safety Requirements (FSR/TSR-DMS-xxxx)
             └── Verification Cases (TST-DMS-xxxx)
 ```
+
+## Governing output architecture
+
+```text
+Behavioral severity: NORMAL → MONITOR → WARNING → DANGER → CRITICAL
+DMS availability:      OK → LIMITED → DEGRADED → UNAVAILABLE
+```
+
+These axes shall remain independent. A blocked camera is a system-availability failure, not a critical driver-behaviour classification.
 
 ## Regulatory structure
 
@@ -51,4 +68,4 @@ The compliance module distinguishes:
 The current baseline includes India CMVR/AIS-184 applicability for M2/M3/N2/N3 programmes, Bharat NCAP/AIS-197 tracking, EU DDAW and ADDW, UNECE R171 DCAS integration, cybersecurity/software-update references, and India DPDP privacy obligations.
 
 ## Baseline status
-**v0.2 — Mandate-driven concept and system-definition baseline.** Exact clause thresholds, exemptions, controlled editions and technical-service interpretations remain subject to formal homologation/legal review before a compliance claim or production release.
+**v0.3 — Scenario-decomposed system-requirements baseline.** Exact calibration thresholds, controlled regulatory clauses, subsystem performance allocations and technical-service interpretations remain subject to formal OEM design review, safety analysis and homologation approval.
